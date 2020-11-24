@@ -2,35 +2,32 @@
 
 namespace App\Http\Livewire;
 
-
 use App\Models\Contact;
 use Livewire\Component;
 
 class RegistrationFrom extends Component
 {
-    protected $listeners = ['getUpdateId','forceColsedModal'];
+    protected $listeners = ['getUpdateId', 'forceColsedModal'];
     protected $rules = [
         'name' => 'required|min:4',
-        'email'     => 'required|email'
+        'email' => 'required|email',
     ];
 
     public $name = '';
-    public $email     = '';
+    public $email = '';
     public $firstTime = true;
-    public $contactId ;
-  
-
+    public $contactId;
 
     public function render()
     {
         $contacts = Contact::all();
-        return view('livewire.registration-from',compact('contacts'));
+        return view('livewire.registration-from', compact('contacts'));
     }
     public function getUpdateId($contactId)
     {
         $this->contactId = $contactId;
         $modal = Contact::find($contactId);
-        $this->name  = $modal->name;
+        $this->name = $modal->name;
         $this->email = $modal->email;
 
     }
@@ -41,7 +38,6 @@ class RegistrationFrom extends Component
         $this->validateOnly($propertyName);
     }
 
-    
     public function resetFrom()
     {
         $this->name = '';
@@ -53,22 +49,24 @@ class RegistrationFrom extends Component
     public function forceColsedModal()
     {
         $this->resetFrom();
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
     public function saveContact()
     {
         $validatedData = $this->validate();
-        if($this->contactId){
+        if ($this->contactId) {
             Contact::find($this->contactId)->update($validatedData);
-        }else{
+        } else {
             Contact::create($validatedData);
         }
-        
+
         $contacts = Contact::all();
         $this->resetFrom();
         $this->emit('refresh');
+        $this->emit('message');
         $this->dispatchBrowserEvent('closeModel');
         session()->flash('message', 'Contact added successfully updated.');
     }
 
-   
 }

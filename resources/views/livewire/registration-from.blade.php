@@ -1,13 +1,13 @@
 <div>
 
-    @if (session()->has('message'))
+    {{-- @if (session()->has('message'))
     <div class="alert alert-success">
         {{ session('message') }}
     </div>
-    @endif
-    <h1>hello</h1>
+    @endif --}}
+   
     <form class="needs-validation  " wire:submit.prevent="saveContact">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-12">
             <label for="validationServer01">Student Name</label>
             <input wire:model="name" type="text"
                 class="form-control @if($errors->has('name')) is-invalid @elseif(!$firstTime) is-valid @endif"
@@ -15,10 +15,10 @@
 
             @error('name')
             <div class="invalid-feedback">{{ $errors->first('name') }}</div>
-            @enderror
-        </div>
+        @enderror
+            </div>
 
-        <div class="col-md-6 mb-3">
+        <div class="col-md-12">
             <label for="validationServer02">Email</label>
 
             <input wire:model="email" type="text" class="form-control @if($errors->has('email')) is-invalid  @endif"
@@ -28,7 +28,7 @@
             <div class="invalid-feedback">{{ $errors->first('email') }}</div>
             @enderror
         </div>
-        <button class="btn btn-primary" type="submit">Submit form</button>
+        <button class="btn btn-primary mt-3" type="submit">Submit form</button>
     </form>
 
 

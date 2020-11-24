@@ -9,16 +9,19 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   @livewireStyles
   <title>Hello, world!</title>
 </head>
 
 <body>
-  <div class="container">
+  <div class="container mt-3">
 
     @yield('content')
 
-  </div>
+    </div>
 
   @livewireScripts
   <script>
@@ -26,23 +29,19 @@
         $('#modalFrom').modal('hide');
       });
       window.addEventListener('openModal', event => {
-        
         $('#modalFrom').modal('show');
       });
 
       window.addEventListener('deleteToastModalShow', event => {
-        
         $('#deleteToastModal').modal('show');
       });
-      window.addEventListener('deleteToastModalHide', event => {
-        
+      window.addEventListener('deleteToastModalHide', event => {        
         $('#deleteToastModal').modal('hide');
       });
       
       $(document).ready(function(){
-        alert('The modal is now hidden.');
+        $(".alert").alert('close')
         $("#modalFrom").on('hidden.bs.modal', function(){
-          alert('The modal is now hidden.');
           livewire.emit('forceColsedModal');
         });
       });
