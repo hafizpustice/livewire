@@ -17,12 +17,35 @@ class RegistrationFrom extends Component
     public $email = '';
     public $firstTime = true;
     public $contactId;
-
+    public $districts=[];
+    //public $regions =[];
+    public $region_id;
+    public $district_id;
+    public $hh;
+    
     public function render()
     {
+        // if(! empty($this->region_id)){
+            if($this->region_id == "Dhaka"){
+                $this->districts = ['natore','abc','def'];
+            }else if($this->region_id == "rajshahi"){
+                $this->districts = ['RAJ-1','ss2','ss3'];
+            }else{
+                $this->districts = ['ss1','ss2','ss3'];
+            }
+            
+        //     $this->district_id = 'hi';
+        //     //dd('yes');
+        // }
+        //dd('yes');
+        $regions = ['Dhaka','rajshahi','sylhet'];
+        //$this->districts = ['RAJ-1','ss2','ss3'];
+        //dd($regions);
         $contacts = Contact::all();
-        return view('livewire.registration-from', compact('contacts'));
+        return view('livewire.registration-from', compact('contacts','regions'));
+        
     }
+    
     public function getUpdateId($contactId)
     {
         $this->contactId = $contactId;
@@ -34,7 +57,7 @@ class RegistrationFrom extends Component
 
     public function updated($propertyName)
     {
-        $this->firstTime = false;
+       // $this->firstTime = false;
         $this->validateOnly($propertyName);
     }
 
@@ -67,6 +90,7 @@ class RegistrationFrom extends Component
         $this->emit('message');
         $this->dispatchBrowserEvent('closeModel');
         session()->flash('message', 'Contact added successfully updated.');
+        
     }
 
 }

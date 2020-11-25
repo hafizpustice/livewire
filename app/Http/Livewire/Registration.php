@@ -15,17 +15,32 @@ class Registration extends Component
     public $action;
     public $update='';
     public $messageShow=false;
+    public $live_data;
+    public $search;
     public function render()
     {
-        $contacts = Contact::latest()->paginate(3);
+        if($this->search){
+            $contacts = Contact::where ( 'name', 'LIKE', '%' . $this->search . '%' )->paginate(7);
+            //dd($contacts);  
+        }else{
+            $contacts = Contact::latest()->paginate(3);
+        }
+        
         return view('livewire.registration', compact('contacts'));
 
+    }
+
+    public function updated($propertyName)
+    {
+        $this->live_data = $propertyName;
+        $contacts = Contact::where ( 'name', 'LIKE', '%' . $this->search . '%' )->get();
     }
 
     public function message()
     {
         $this->messageShow = true;
         $this->update = 'Contract created successfully';
+        $this->emit('messageRefresh');
     }
 
     public function selectItem($selectItem, $action)
