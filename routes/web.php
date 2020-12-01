@@ -33,3 +33,7 @@ Route::get('nestingComponet', function () {
     return view('blade.nestingComponet');
 });
 
+
+Route::get('html', function () {
+    return view('html.index');
+});
