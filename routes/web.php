@@ -33,3 +33,11 @@ Route::get('nestingComponet', function () {
     return view('blade.nestingComponet');
 });
 
+Route::get('ajax', function () {
+    return view('blade.ajax');
+
+});
+
+Route::get('ajax_test/data', function ($data) {
+    return $data;
+});

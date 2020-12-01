@@ -17,11 +17,11 @@
 </head>
 
 <body>
-
   <div class="container mt-3">
 
     <div class="3 li">
-
+      <h3>hello</h3>
+      <span>hello</span>
     </div>
 
     @yield('content')
@@ -29,7 +29,7 @@
   </div>
 
   @yield('script')
-  @livewireScripts
+  {{-- //@livewireScripts --}}
 
   <script>
     window.addEventListener('closeModel', event => {
@@ -47,7 +47,7 @@
       });
      
       $(document).ready(function(){
-        
+        //alert('hello')
         setTimeout(function () { $(".alert").alert('close') }, 2000);
         $("#modalFrom").on('hidden.bs.modal', function(){
           livewire.emit('forceColsedModal');

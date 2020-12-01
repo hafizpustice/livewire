@@ -1,0 +1,11 @@
+{
+    "launch": {
+
+        "configurations": [],
+        "compounds": []
+    },
+    "editor.fontSize": 18,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.fontFamily": " Consolas, 'Courier New', monospace"
+}
