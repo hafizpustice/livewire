@@ -40,4 +40,9 @@ Route::get('ajax', function () {
 
 Route::get('ajax_test/data', function ($data) {
     return $data;
+
+
+Route::get('html', function () {
+    return view('html.index');
+
 });
